@@ -1,0 +1,52 @@
+{
+    "title": "Shopify Store & Product Catalog Spy Input",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "startUrls": {
+            "title": "Shopify Store URLs / Domains",
+            "type": "array",
+            "description": "List of Shopify store URLs or domains (e.g., https://allbirds.com, gymshark.com, or specific collections like https://kith.com/collections/mens).",
+            "prefill": [
+                { "url": "https://allbirds.com" }
+            ],
+            "default": [
+                { "url": "https://allbirds.com" }
+            ],
+            "editor": "requestListSources"
+        },
+        "maxProductsPerStore": {
+            "title": "Max Products Per Store",
+            "type": "integer",
+            "description": "Maximum number of products to extract per store.",
+            "minimum": 1,
+            "maximum": 10000,
+            "default": 100
+        },
+        "onlyInStock": {
+            "title": "Only In-Stock Products",
+            "type": "boolean",
+            "description": "If enabled, only products with at least one variant available in stock will be returned.",
+            "default": false
+        },
+        "searchKeyword": {
+            "title": "Keyword Filter (Optional)",
+            "type": "string",
+            "description": "Filter products containing this keyword in the title, tags, or vendor (case-insensitive).",
+            "default": ""
+        },
+        "publishedAfter": {
+            "title": "Published After Date (Optional)",
+            "type": "string",
+            "description": "Filter products published after this date (ISO format YYYY-MM-DD, e.g., 2026-01-01) to identify new arrivals.",
+            "default": ""
+        },
+        "flattenVariants": {
+            "title": "Flatten Output by Variant",
+            "type": "boolean",
+            "description": "If true, each variant becomes a separate dataset row (ideal for SKU/inventory tracking). If false, each product is one row with variants nested.",
+            "default": false
+        }
+    },
+    "required": ["startUrls"]
+}

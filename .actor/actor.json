@@ -1,0 +1,12 @@
+{
+    "actorSpecification": 1,
+    "name": "shopify-product-catalog-spy",
+    "title": "Shopify Store & Product Catalog Spy",
+    "description": "Extract products, variants, pricing, inventory availability, images, and new arrivals from any Shopify store without proxies or captchas. Fast, reliable, and built for e-commerce, dropshipping, and AI workflows.",
+    "version": "0.1",
+    "dockerfile": "./Dockerfile",
+    "storages": {
+        "dataset": "./dataset_schema.json"
+    },
+    "output": "./output_schema.json"
+}

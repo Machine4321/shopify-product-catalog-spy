@@ -1,0 +1,12 @@
+{
+    "actorOutputSchemaVersion": 1,
+    "title": "Shopify Store & Product Catalog Spy Output",
+    "properties": {
+        "products": {
+            "type": "string",
+            "title": "Extracted Shopify Products",
+            "description": "Dataset containing products, pricing, inventory, variants, and metadata from target Shopify stores.",
+            "template": "{{storages.datasets.default.apiUrl}}/items"
+        }
+    }
+}

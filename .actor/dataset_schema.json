@@ -1,0 +1,66 @@
+{
+    "actorSpecification": 1,
+    "fields": {
+        "type": "object",
+        "properties": {
+            "storeUrl": { "type": "string" },
+            "productId": { "type": "string" },
+            "title": { "type": "string" },
+            "handle": { "type": "string" },
+            "productUrl": { "type": "string" },
+            "vendor": { "type": "string" },
+            "productType": { "type": "string" },
+            "tags": { "type": "array" },
+            "minPrice": { "type": "number" },
+            "maxPrice": { "type": "number" },
+            "compareAtPrice": { "type": "number" },
+            "hasDiscount": { "type": "boolean" },
+            "discountPercent": { "type": "number" },
+            "inStock": { "type": "boolean" },
+            "totalVariants": { "type": "integer" },
+            "availableVariants": { "type": "integer" },
+            "primaryImageUrl": { "type": "string" },
+            "imageUrls": { "type": "array" },
+            "variants": { "type": "array" },
+            "publishedAt": { "type": "string" },
+            "createdAt": { "type": "string" },
+            "updatedAt": { "type": "string" },
+            "scrapedAt": { "type": "string" }
+        },
+        "required": ["storeUrl", "title", "productUrl"]
+    },
+    "views": {
+        "overview": {
+            "title": "Overview",
+            "transformation": {
+                "fields": [
+                    "title",
+                    "vendor",
+                    "minPrice",
+                    "maxPrice",
+                    "inStock",
+                    "hasDiscount",
+                    "discountPercent",
+                    "totalVariants",
+                    "storeUrl",
+                    "productUrl",
+                    "primaryImageUrl"
+                ]
+            },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "title": { "label": "Product Title" },
+                    "vendor": { "label": "Brand / Vendor" },
+                    "minPrice": { "label": "Min Price" },
+                    "maxPrice": { "label": "Max Price" },
+                    "inStock": { "label": "In Stock" },
+                    "hasDiscount": { "label": "On Sale" },
+                    "discountPercent": { "label": "Discount %" },
+                    "totalVariants": { "label": "Variants" },
+                    "storeUrl": { "label": "Store" }
+                }
+            }
+        }
+    }
+}

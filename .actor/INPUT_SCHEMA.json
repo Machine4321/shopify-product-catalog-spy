@@ -21,7 +21,8 @@
             "description": "Maximum number of products to extract per store.",
             "minimum": 1,
             "maximum": 10000,
-            "default": 100
+            "default": 100,
+            "editor": "number"
         },
         "onlyInStock": {
             "title": "Only In-Stock Products",
@@ -33,13 +34,15 @@
             "title": "Keyword Filter (Optional)",
             "type": "string",
             "description": "Filter products containing this keyword in the title, tags, or vendor (case-insensitive).",
-            "default": ""
+            "default": "",
+            "editor": "textfield"
         },
         "publishedAfter": {
             "title": "Published After Date (Optional)",
             "type": "string",
             "description": "Filter products published after this date (ISO format YYYY-MM-DD, e.g., 2026-01-01) to identify new arrivals.",
-            "default": ""
+            "default": "",
+            "editor": "textfield"
         },
         "flattenVariants": {
             "title": "Flatten Output by Variant",

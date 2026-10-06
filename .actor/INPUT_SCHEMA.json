@@ -6,12 +6,12 @@
         "startUrls": {
             "title": "Shopify Store URLs / Domains",
             "type": "array",
-            "description": "List of Shopify store URLs or domains (e.g., https://allbirds.com, gymshark.com, or specific collections like https://kith.com/collections/mens).",
+            "description": "List of Shopify store URLs or domains (e.g., https://colourpop.com, https://shop.fentybeauty.com, or specific collections like https://kith.com/collections/mens).",
             "prefill": [
-                { "url": "https://allbirds.com" }
+                { "url": "https://colourpop.com" }
             ],
             "default": [
-                { "url": "https://allbirds.com" }
+                { "url": "https://colourpop.com" }
             ],
             "editor": "requestListSources"
         },
@@ -21,7 +21,7 @@
             "description": "Maximum number of products to extract per store.",
             "minimum": 1,
             "maximum": 10000,
-            "default": 100,
+            "default": 50,
             "editor": "number"
         },
         "onlyInStock": {
@@ -49,6 +49,18 @@
             "type": "boolean",
             "description": "If true, each variant becomes a separate dataset row (ideal for SKU/inventory tracking). If false, each product is one row with variants nested.",
             "default": false
+        },
+        "proxyConfiguration": {
+            "title": "Proxy Configuration",
+            "type": "object",
+            "description": "Proxy settings for reliable crawling. Default uses Apify Proxy.",
+            "prefill": {
+                "useApifyProxy": true
+            },
+            "default": {
+                "useApifyProxy": true
+            },
+            "editor": "proxy"
         }
     },
     "required": ["startUrls"]

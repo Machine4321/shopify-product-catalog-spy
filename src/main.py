@@ -29,13 +29,12 @@ async def main() -> None:
             Actor.log.info(f"Keyword filter: '{search_keyword}'")
         if published_after:
             Actor.log.info(f"Published after: '{published_after}'")
-        Actor.log.info(f"Flatten variants: {flatten_variants}")
         Actor.log.info("=" * 60)
 
         total_extracted_records = 0
         successful_stores = 0
 
-        async with httpx.AsyncClient(timeout=20.0, follow_redirects=True) as client:
+        async with httpx.AsyncClient(timeout=25.0, follow_redirects=True) as client:
             for item in start_urls:
                 raw_url = item.get("url") if isinstance(item, dict) else str(item)
                 if not raw_url or not raw_url.strip():
@@ -57,28 +56,26 @@ async def main() -> None:
                     )
 
                     if records:
-                        # Check if it was an error record
-                        if len(records) == 1 and not records[0].get("isShopify", True):
-                            Actor.log.warning(f"Store check notice for {raw_url}: {records[0].get('error')}")
-                        else:
-                            successful_stores += 1
+                        successful_stores += 1
+                        # Push records in safe batches
+                        batch_size = 50
+                        for i in range(0, len(records), batch_size):
+                            chunk = records[i:i + batch_size]
+                            try:
+                                await Actor.push_data(chunk)
+                            except Exception as push_err:
+                                Actor.log.error(f"Failed to push batch to dataset: {push_err}")
+                                if hasattr(push_err, "data"):
+                                    Actor.log.error(f"Push error details: {push_err.data}")
+                                raise push_err
 
-                        await Actor.push_data(records)
                         total_extracted_records += len(records)
-                        Actor.log.info(f"Saved {len(records)} records for store: {raw_url}")
+                        Actor.log.info(f"Saved {len(records)} products for store: {raw_url}")
                     else:
                         Actor.log.warning(f"No products matched the given criteria for: {raw_url}")
 
                 except Exception as e:
                     Actor.log.error(f"Error processing store {raw_url}: {e}", exc_info=True)
-                    # Push error record so user receives feedback
-                    await Actor.push_data([{
-                        "storeUrl": raw_url,
-                        "isShopify": False,
-                        "error": str(e),
-                        "productsCount": 0,
-                        "scrapedAt": datetime.now(timezone.utc).isoformat()
-                    }])
 
         Actor.log.info("=" * 60)
         Actor.log.info(f"🎉 Run completed successfully!")

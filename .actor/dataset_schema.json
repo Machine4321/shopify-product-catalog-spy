@@ -2,7 +2,6 @@
     "actorSpecification": 1,
     "fields": {
         "type": "object",
-        "additionalProperties": true,
         "properties": {
             "storeUrl": { "type": "string" },
             "productId": { "type": "string" },
@@ -12,25 +11,25 @@
             "vendor": { "type": "string" },
             "productType": { "type": "string" },
             "tags": { "type": "array" },
-            "description": { "type": ["string", "null"] },
-            "minPrice": { "type": ["number", "null"] },
-            "maxPrice": { "type": ["number", "null"] },
-            "compareAtPrice": { "type": ["number", "null"] },
+            "description": { "type": "string" },
+            "minPrice": { "type": "number" },
+            "maxPrice": { "type": "number" },
+            "compareAtPrice": { "type": "number" },
             "hasDiscount": { "type": "boolean" },
-            "discountPercent": { "type": ["number", "null"] },
+            "discountPercent": { "type": "number" },
             "inStock": { "type": "boolean" },
             "totalVariants": { "type": "integer" },
             "availableVariants": { "type": "integer" },
-            "primaryImageUrl": { "type": ["string", "null"] },
+            "primaryImageUrl": { "type": "string" },
             "imageUrls": { "type": "array" },
             "options": { "type": "array" },
             "variants": { "type": "array" },
-            "publishedAt": { "type": ["string", "null"] },
-            "createdAt": { "type": ["string", "null"] },
-            "updatedAt": { "type": ["string", "null"] },
+            "publishedAt": { "type": "string" },
+            "createdAt": { "type": "string" },
+            "updatedAt": { "type": "string" },
             "scrapedAt": { "type": "string" }
         },
-        "required": ["storeUrl", "title"]
+        "required": ["storeUrl", "title", "productUrl"]
     },
     "views": {
         "overview": {
